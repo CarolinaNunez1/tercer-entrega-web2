@@ -10,6 +10,7 @@ $router -> addRoute ('secciones', 'GET', 'SeccionApiController', 'getSecciones')
 $router -> addRoute ('secciones/:ID', 'GET', 'SeccionApiController', 'getSeccion');
 $router -> addRoute ('secciones/:ID', 'DELETE', 'SeccionApiController', 'deleteSeccion');
 $router -> addRoute ('secciones', 'POST', 'SeccionApiController', 'insertSeccion');
+$router -> addRoute ('secciones', 'PUT', 'SeccionApiController', 'modificarSeccion');
 $router -> addRoute ('auth/token', 'GET', 'AuthApiController', 'getToken');
 
 

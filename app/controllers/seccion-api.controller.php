@@ -74,4 +74,24 @@ class seccionApiController {
         }
     } 
 
+    public function modificarSeccion($params = null) {
+        $id = $params[':ID'];
+        $id_noticia = $params[':id_noticia'];
+        $tipo = $params[':tipo'];
+        $descripcion = $params[':descripcion'];
+        $orden = $params[':orden'];
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logueado", 401);
+            return;
+        }
+
+        $seccion = $this->model->get($id);
+        if ($seccion) {
+            $this->model->modificar($id, $id_noticia, $tipo, $descripcion, $orden);
+            $this->view->response($seccion);
+        } else 
+            $this->view->response("La seccion con el id=$id no existe", 404);
+    }
+
 }
