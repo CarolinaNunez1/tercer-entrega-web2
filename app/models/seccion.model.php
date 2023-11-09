@@ -12,7 +12,7 @@ class SeccionModel {
      * Devuelve la lista de secciones
      */
     public function getAll() {
-        $query = $this->db->prepare("SELECT * FROM seccion");
+        $query = $this->db->prepare("SELECT * FROM seccion ORDER BY tipo ASC");
         $query->execute();
 
         
@@ -40,6 +40,12 @@ class SeccionModel {
         return $this->db->lastInsertId();
     }
 
+    //actualiza 
+
+    public function modificar($id_noticia, $tipo, $descripcion, $orden){
+        $query = $this->db->prepare("UPDATE seccion SET id_noticia = ?, tipo = ?, descripcion = ?, orden = ?");
+        $query->execute([$id_noticia, $tipo, $descripcion, $orden]);
+    }
 
     /**
      * Elimina un seccion dado su id.
