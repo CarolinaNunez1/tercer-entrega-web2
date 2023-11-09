@@ -42,9 +42,9 @@ class SeccionModel {
 
     //actualiza 
 
-    public function modificar($id_noticia, $tipo, $descripcion, $orden){
-        $query = $this->db->prepare("UPDATE seccion SET id_noticia = ?, tipo = ?, descripcion = ?, orden = ?");
-        $query->execute([$id_noticia, $tipo, $descripcion, $orden]);
+    public function modificar($id_seccion, $tipo, $descripcion, $orden){
+        $query = $this->db->prepare("UPDATE seccion SET  tipo = ?, descripcion = ?, orden = ? WHERE id_seccion = ?");
+        $query->execute([$tipo, $descripcion, $orden, $id_seccion]);
     }
 
     /**
