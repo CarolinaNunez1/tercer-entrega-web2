@@ -59,10 +59,10 @@ class ApiComentarioController{
         
         $comentario = $this->getData();
 
-        if (empty($comentario->comentario) || empty($comentario->nota) || empty($comentario->id_seccion)) {
+        if (empty($comentario->comentario) || empty($comentario->nota) || empty($comentario->id_noticia)) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($comentario->comentario, $comentario->nota, $comentario->id_seccion);
+            $id = $this->model->insert($comentario->comentario, $comentario->nota, $comentario->id_noticia);
             $comentario = $this->model->get($id);
             $this->view->response($comentario, 201);
         }

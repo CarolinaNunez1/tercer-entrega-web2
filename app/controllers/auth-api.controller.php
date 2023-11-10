@@ -1,5 +1,5 @@
 <?php
-require_once './app/models/seccion.model.php';
+require_once './app/models/noticia.model.php';
 require_once './app/views/api.view.php';
 require_once './app/helpers/auth-api.helper.php';
 
@@ -16,7 +16,7 @@ class AuthApiController {
     private $data;
 
     public function __construct() {
-        //$this->model = new seccionModel();
+        //$this->model = new noticiaModel();
         $this->view = new ApiView();
         $this->authHelper = new AuthApiHelper();
         

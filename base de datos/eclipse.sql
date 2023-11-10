@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2023 a las 17:54:52
+-- Tiempo de generación: 09-11-2023 a las 20:44:03
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -31,7 +31,7 @@ CREATE TABLE `comentarios` (
   `id_comentario` int(100) NOT NULL,
   `comentario` varchar(500) NOT NULL,
   `nota` int(30) NOT NULL,
-  `id_seccion` int(50) NOT NULL
+  `id_noticia` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,7 +109,7 @@ INSERT INTO `usuario` (`nombre`, `rol`, `passwd`, `email`) VALUES
 --
 ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`id_comentario`),
-  ADD KEY `comentarios_ibfk_1` (`id_seccion`);
+  ADD KEY `id_noticia` (`id_noticia`);
 
 --
 -- Indices de la tabla `noticia`
@@ -150,7 +150,7 @@ ALTER TABLE `noticia`
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id_seccion` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_seccion` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -160,7 +160,7 @@ ALTER TABLE `seccion`
 -- Filtros para la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_seccion`) REFERENCES `seccion` (`id_seccion`);
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_noticia`) REFERENCES `noticia` (`id_noticia`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,15 +1,15 @@
 "use strict"
 
-const URL = "api/secciones/";
+const URL = "api/noticias/";
 
-let secciones = [];
+let noticias = [];
 
-let form = document.querySelector('#seccion-form');
-form.addEventListener('submit', insertSeccion);
+let form = document.querySelector('#noticia-form');
+form.addEventListener('submit', insertNoticia);
 
 
 /**
- * Obtiene todas las secciones de la API REST
+ * Obtiene todas las noticias de la API REST
  */
 async function getAll() {
     try {
@@ -17,43 +17,45 @@ async function getAll() {
         if (!response.ok) {
             throw new Error('Recurso no existe');
         }
-        secciones = await response.json();
+        noticias = await response.json();
 
-        showsecciones();
+        shownoticias();
     } catch(e) {
         console.log(e);
     }
 }
 
 /**
- * Inserta una seccion via API REST
+ * Inserta una noticia via API REST
  */
-async function insertSeccion(e) {
+async function insertNoticia(e) {
     e.preventDefault();
     
     let data = new FormData(form);
-    let seccion = {
+    let noticia = {
         id_noticia: data.get('id_noticia'),
-        tipo: data.get('tipo'),
-        descripcion: data.get('descripcion'),
-        orden: data.get('orden'),
+        titulo: data.get('titulo'),
+        fecha: data.get('fecha'),
+        autor: data.get('autor'),
+        texto: data.get('texto'),
+        imagen: data.get('imagen'),
     };
 
     try {
         let response = await fetch(URL, {
             method: "POST",
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(seccion)
+            body: JSON.stringify(noticia)
         });
         if (!response.ok) {
             throw new Error('Error del servidor');
         }
 
-        let nSeccion = await response.json();
+        let nNoticia = await response.json();
 
         // inserto la tarea nuevo
-        secciones.push(nSeccion);
-        showsecciones();
+        noticias.push(nNoticia);
+        shownoticias();
 
         form.reset();
     } catch(e) {
@@ -61,31 +63,31 @@ async function insertSeccion(e) {
     }
 } 
 
-async function deleteSeccion(e) {
+async function deleteNoticia(e) {
     e.preventDefault();
     try {
-        let id = e.target.dataset.seccion;
+        let id = e.target.dataset.noticia;
         let response = await fetch(URL + id, {method: 'DELETE'});
         if (!response.ok) {
             throw new Error('Recurso no existe');
         }
 
         // eliminar la tarea del arreglo global
-        secciones = secciones.filter(seccion => seccion.id != id);
-        showSecciones();
+        noticias = noticias.filter(noticia => noticia.id != id);
+        shownoticias();
     } catch(e) {
         console.log(e);
     }
 }
 
-function showSecciones() {
-    let ul = document.querySelector("#seccion-list");
+function showNoticias() {
+    let ul = document.querySelector("#noticia-list");
     ul.innerHTML = "";
 
     // asigno event listener para los botones
     const btnsDelete = document.querySelectorAll('a.btn-delete');
     for (const btnDelete of btnsDelete) {
-        btnDelete.addEventListener('click', deleteSeccion);
+        btnDelete.addEventListener('click', deleteNoticia);
     }
 }
 

@@ -15,7 +15,7 @@ async function getAll() {
         if (!response.ok) {
             throw new Error('Recurso no existe');
         }
-        secciones = await response.json();
+        noticias = await response.json();
 
         showComentarios();
     } catch(e) {
@@ -33,7 +33,7 @@ async function insertComentario(e) {
     let comentario = {
         comentario: data.get('comentario'),
         nota: data.get('nota'),
-        id_seccion: data.get('id_seccion'),
+        id_noticia: data.get('id_noticia'),
     };
 
     try {

@@ -1,16 +1,16 @@
 <?php
 require_once './libs/Router.php';
-require_once './app/controllers/seccion-api.controller.php';
+require_once './app/controllers/noticia-api.controller.php';
 require_once './app/controllers/auth-api.controller.php';
 require_once './app/controllers/apiComentarioController.php';
 
 //creo el router
 $router= new router();
-$router -> addRoute ('secciones', 'GET', 'SeccionApiController', 'getSecciones');
-$router -> addRoute ('secciones/:ID', 'GET', 'SeccionApiController', 'getSeccion');
-$router -> addRoute ('secciones/:ID', 'DELETE', 'SeccionApiController', 'deleteSeccion');
-$router -> addRoute ('secciones', 'POST', 'SeccionApiController', 'insertSeccion');
-$router -> addRoute ('secciones/:ID', 'PUT', 'SeccionApiController', 'modificarSeccion');
+$router -> addRoute ('noticias', 'GET', 'NoticiaApiController', 'getNoticias');
+$router -> addRoute ('noticias/:ID', 'GET', 'NoticiaApiController', 'getNoticia');
+$router -> addRoute ('noticias/:ID', 'DELETE', 'NoticiaApiController', 'deleteNoticia');
+$router -> addRoute ('noticias', 'POST', 'NoticiaApiController', 'insertNoticia');
+$router -> addRoute ('noticias/:ID', 'PUT', 'NoticiaApiController', 'modificarNoticia');
 $router -> addRoute ('auth/token', 'GET', 'AuthApiController', 'getToken');
 
 

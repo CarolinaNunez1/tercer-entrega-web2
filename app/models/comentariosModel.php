@@ -32,9 +32,9 @@ class comentariosModel{
     /**
      * Inserta un comentario en la base de datos.
      */
-    public function insert($comentario, $nota,$id_seccion) {
-        $query = $this->db->prepare("INSERT INTO comentario (comentario, nota, id_seccion$id_seccion) VALUES (?,?,?)");
-        $query->execute([$comentario, $nota, $id_seccion]);
+    public function insert($comentario, $nota,$id_noticia) {
+        $query = $this->db->prepare("INSERT INTO comentario (comentario, nota, id_noticia$id_noticia) VALUES (?,?,?)");
+        $query->execute([$comentario, $nota, $id_noticia]);
 
         return $this->db->lastInsertId();
     }
@@ -44,7 +44,7 @@ class comentariosModel{
      * Elimina un comentario dado su id.
      */
     function delete($id) {
-        $query = $this->db->prepare('DELETE FROM comentarios WHERE id_comentario = ?');
+        $query = $this->db->prepare('DELETE FROM comen WHERE id_comentario = ?');
         $query->execute([$id]);
     }
 
