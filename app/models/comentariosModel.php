@@ -11,10 +11,8 @@ class comentariosModel{
 
 
     public function getAll() {
-        $query = $this->db->prepare("SELECT * FROM comentarios");
+        $query = $this->db->prepare("SELECT * FROM comentario");
         $query->execute();
-
-        
         $comentarios = $query->fetchAll(PDO::FETCH_OBJ); // devuelve un arreglo de objetos
         
         return $comentarios;
@@ -22,7 +20,7 @@ class comentariosModel{
 
     //ver id pasado por parametro
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM comentarios WHERE id_comentario = ?");
+        $query = $this->db->prepare("SELECT * FROM comentario WHERE id_comentario = ?");
         $query->execute([$id]);
         $comentario = $query->fetch(PDO::FETCH_OBJ);
         
@@ -33,7 +31,7 @@ class comentariosModel{
      * Inserta un comentario en la base de datos.
      */
     public function insert($comentario, $nota,$id_noticia) {
-        $query = $this->db->prepare("INSERT INTO comentario (comentario, nota, id_noticia$id_noticia) VALUES (?,?,?)");
+        $query = $this->db->prepare("INSERT INTO comentario (comentario, nota, id_noticia) VALUES (?,?,?)");
         $query->execute([$comentario, $nota, $id_noticia]);
 
         return $this->db->lastInsertId();
@@ -44,7 +42,7 @@ class comentariosModel{
      * Elimina un comentario dado su id.
      */
     function delete($id) {
-        $query = $this->db->prepare('DELETE FROM comen WHERE id_comentario = ?');
+        $query = $this->db->prepare('DELETE FROM comentario WHERE id_comentario = ?');
         $query->execute([$id]);
     }
 

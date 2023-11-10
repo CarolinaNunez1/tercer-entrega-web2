@@ -33,11 +33,11 @@ class NoticiaModel {
     /**
      * Inserta una noticia en la base de datos.
      */
-    public function insert($id_noticia, $titulo, $fecha, $autor, $texto, $imagen) {
-        $query = $this->db->prepare("INSERT INTO noticia (id_noticia, titulo, fecha, autor, texto, imagen) VALUES (?,?,?,?,?,?)");
-        $query->execute([$id_noticia, $titulo, $fecha, $autor, $texto, $imagen]);
+    public function insert($titulo, $fecha, $autor, $texto, $imagen) {
+        $query = $this->db->prepare("INSERT INTO noticia (titulo, fecha, autor, texto, imagen) VALUES (?,?,?,?,?)");
+        $noticia = $query->execute([$titulo, $fecha, $autor, $texto, $imagen]);
 
-        return $this->db->lastInsertId();
+        return $noticia;
     }
 
     //actualiza una noticia

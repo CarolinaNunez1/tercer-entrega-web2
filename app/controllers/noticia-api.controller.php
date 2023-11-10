@@ -3,7 +3,7 @@ require_once './app/models/noticia.model.php';
 require_once './app/views/api.view.php';
 require_once './app/helpers/auth-api.helper.php';
 
-class seccionApiController {
+class noticiaApiController {
     private $model;
     private $view;
     private $authHelper;
@@ -11,7 +11,7 @@ class seccionApiController {
     private $data;
 
     public function __construct() {
-        $this->model = new seccionModel();
+        $this->model = new noticiaModel();
         $this->view = new ApiView();
         $this->authHelper = new AuthApiHelper();
         
@@ -58,22 +58,27 @@ class seccionApiController {
     
 
     public function insertnoticia($params = null) {
-        if(!$this->authHelper->isLoggedIn()){
+        /*if(!$this->authHelper->isLoggedIn()){
             $this->view->response("No estas logueado", 401);
             return;
-        }
+        }*/
         
         $noticia = $this->getData();
 
-        if (empty($noticia->id_noticia) || empty($noticia->titulo) || empty($noticia->fecha) || empty($noticia->autor) || empty($noticia->texto) || empty($noticia->imagen)) {
+        $titulo = $noticia->titulo;
+        $fecha = $noticia->fecha;
+        $autor = $noticia->autor;
+        $texto = $noticia->texto;
+        $imagen = $noticia->imagen;
+
+        if (empty($titulo) || empty($fecha) || empty($autor) || empty($texto) || empty($imagen)) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($noticia->id_noticia, $noticia->titulo, $noticia->fecha, $noticia->autor, $noticia->texto, $noticia->imagen);
-            $noticia = $this->model->get($id);
-            $this->view->response($noticia, 201);
+            $this->model->insert($titulo, $fecha, $autor, $texto, $imagen);
+            $this->view->response("se cargó exitosamente", 201);
         }
-    } 
-
+    }
+    
     public function modificarNoticia($params = null) {
         $id = $params[':ID'];
     
@@ -99,10 +104,10 @@ class seccionApiController {
         $texto = $data[':texto'];
         $imagen = $data[':imagen'];
     
-      /*  if (!$this->authHelper->isLoggedIn()) {
+        if (!$this->authHelper->isLoggedIn()) {
             $this->view->response("No estás logueado", 401);
             return;
-        }*/
+        }
     
         try {
             $noticia = $this->model->get($id);
