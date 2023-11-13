@@ -21,8 +21,6 @@ por ejemplo http://localhost/tercer-entrega-web2/api/comentarios con POST me agr
 
 PUT-> /api/noticias (me modifica una noticia)
 por ejemplo http://localhost/tercer-entrega-web2/api/noticias con PUT me modifica una noticia
-PUT-> /api/comentarios (me modifica un comentario)
-por ejemplo http://localhost/tercer-entrega-web2/api/comentarios con PUT me modifica un comentario
 
 
 DELETE:ID-> /api/noticias/:id
